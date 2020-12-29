@@ -1,6 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
-const Score = mongoose.model('Scores');
+//const Score = mongoose.model('Scores');
 const User = mongoose.model('Users');
 const moment = require('moment');
 const utilities = require('../../utilities');
@@ -25,6 +25,12 @@ function createScore(req, res) {
     }
 
     utilities.logInfo("saving now", req);
+
+    let Score;
+
+    const connection = utilities.mongoConnect(mongoose);
+    Score = connection.model('Score', ScoreSchema);
+
     const newScore = new Score({
         value: String(req.body.value),
         createdAt: moment(req.body.createdAt) || moment.utc()
