@@ -32,19 +32,22 @@ function createScore(req, res) {
 //helper function to save the score in the database
 function saveScore(req, res) {
     utilities.logInfo("in saveScore function");
-    try {
-        const newScore = new Score({
-            value: String(req.body.value),
-            description: req.body.description,
-            createdAt: moment(req.body.createdAt) || moment.utc()
-        });
-        newScore.save();
-        utilities.logInfo("saved");
-    }
-    catch(err){
-        utilities.logError(`could not create newScore element ${err}`);
-    }
     
+    const newScore = new Score({
+        value: String(req.body.value),
+        description: req.body.description,
+        createdAt: moment(req.body.createdAt) || moment.utc()
+    });
+    newScore.save(function (err, score) {
+        if (err) {
+            controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
+        }
+        else {
+            utilities.logInfo("saved");
+        }
+    });
+    
+   
     
 }
 
