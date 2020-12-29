@@ -150,14 +150,21 @@ function createScore(req, res) {
 
 //helper function to save the score in the database
 function saveScore(req, res) {
-    const newScore = new Score({
-        value: String(req.body.value),
-        description: req.body.description,
-        createdAt: moment(req.body.createdAt) || moment.utc()
-    });
     utilities.logInfo("in saveScore function");
-    newScore.save();
-    utilities.logInfo("saved");
+    try {
+        const newScore = new Score({
+            value: String(req.body.value),
+            description: req.body.description,
+            createdAt: moment(req.body.createdAt) || moment.utc()
+        });
+        newScore.save();
+        utilities.logInfo("saved");
+    }
+    catch{
+        utilities.logError("could not create newScore element");
+    }
+    
+    
 }
 
 //https://**functionURL**/api/users/surroundingByScore/:userId/:count
