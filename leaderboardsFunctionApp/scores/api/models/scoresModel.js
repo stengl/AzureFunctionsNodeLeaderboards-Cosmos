@@ -23,12 +23,12 @@ const ScoreSchema = new Schema({
   }
 });
 
-ScoreSchema.pre('save', function (next) {
+ScoreSchema.pre('save', function (data, next) {
     utilities.logInfo('pre score save info');
-    return next();
+    next();
 });
 
-ScoreSchema.post('save', function (next) {
+ScoreSchema.post('save', function (data, next) {
     utilities.logInfo('post score save info');
     next();
 });
