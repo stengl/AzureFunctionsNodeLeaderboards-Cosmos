@@ -34,8 +34,18 @@ function createScore(req, res) {
 
     utilities.logInfo(newScore.value, req);
 
+    Score.create(newScore, function (err, data) {
+        if (err) {
+            controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
+        }
+        else {
+            controllerHelpers.respond(null, data, req, res);
+            return;
+        }
+
+    });
    
-    newScore.save(function (err, score) {
+   /* newScore.save(function (err, score) {
         if (err) {
             controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
         }
@@ -43,7 +53,7 @@ function createScore(req, res) {
             utilities.logInfo("saved");
             controllerHelpers.respond(null, score, req, res);            
         }
-    });
+    });*/
     //saveScore(req, res);
 };
 
