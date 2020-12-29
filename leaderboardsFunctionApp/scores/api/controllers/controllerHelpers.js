@@ -56,20 +56,9 @@ function respond(error, data, req, res, httpStatus) {
     }
 }
 
-//parses userId, username from custom headers
-function getUserIdusername(req) {
-    //custom headers filled from authhelper.js
-    const userId = req.headers['CUSTOM_USERID'];
-    const username = req.headers['CUSTOM_USERNAME'];
-    return {
-        userId,
-        username
-    };
-}
-
+/
 module.exports = {
     listUsers,
     listScores,
-    respond,
-    getUserIdusername
+    respond
 }

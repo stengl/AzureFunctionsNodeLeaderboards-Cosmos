@@ -8,15 +8,7 @@ const ScoreSchema = new Schema({
   value: {
     type: String,
     required: 'Enter score value'
-  },/*,
-  userId: {
-    type: String,
-    required: 'Enter userId'
   },
-  username: {
-    type: String,
-    required: 'Enter username'
-  },*/
   createdAt: {
     type: Date,
     default: moment.utc() 
