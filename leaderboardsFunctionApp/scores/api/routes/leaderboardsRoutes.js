@@ -5,7 +5,7 @@ module.exports = function (app) {
   app.route('/api/scores')
         .post(leaderboardsAPI.createScore);
 
-    app.route('/api/scores/all')
+  app.route('/api/scores/all')
         .get(leaderboardsAPI.listAllScores);
 
 

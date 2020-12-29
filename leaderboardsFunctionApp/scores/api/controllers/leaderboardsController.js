@@ -47,7 +47,7 @@ function createScore(req, res) {
 
 };
 
-
+//returns the last max amount of scores defined
 function listAllScores(req, res) {
     utilities.logInfo("in listallscores function");
 
@@ -79,5 +79,6 @@ function saveScore(req, res) {
 
 
 module.exports = {
-    createScore
+    createScore,
+    listAllScores
 }
