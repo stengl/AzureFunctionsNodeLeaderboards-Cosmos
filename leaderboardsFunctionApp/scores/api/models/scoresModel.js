@@ -23,9 +23,9 @@ const ScoreSchema = new Schema({
   }
 });
 
-ScoreSchema.pre('save', function () {
+ScoreSchema.pre('save', function (next) {
     utilities.logInfo('pre score save info');
-    
+    return next();
 });
 
 ScoreSchema.post('save', function (next) {
