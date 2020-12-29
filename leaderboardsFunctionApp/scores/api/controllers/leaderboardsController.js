@@ -52,11 +52,11 @@ function listAllScores(req, res) {
     utilities.logInfo("in listallscores function");
 
     Score.find().exec(function (err, docs) {
-        if(err){
-            respond(err, null, req, res, 400);
+        if (err) {
+            controllerHelpers.respond(err, null, req, res, 400);
         }
         else {
-            respond(err, docs, req, res);
+            controllerHelpers.respond(err, docs, req, res);
         }
     });
 
