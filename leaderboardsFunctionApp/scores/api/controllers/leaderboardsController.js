@@ -1,6 +1,6 @@
 'use strict';
 const mongoose = require('mongoose');
-//const Score = mongoose.model('Scores');
+const Score = mongoose.model('Scores');
 const User = mongoose.model('Users');
 const moment = require('moment');
 const utilities = require('../../utilities');
@@ -26,11 +26,6 @@ function createScore(req, res) {
 
     utilities.logInfo("saving now", req);
 
-    let Score;
-
-    const connection = utilities.mongoConnect(mongoose);
-    Score = connection.model('Scores', ScoreSchema);
-
     const newScore = new Score({
         value: String(req.body.value),
         description: "desc",
@@ -39,13 +34,15 @@ function createScore(req, res) {
 
     utilities.logInfo(newScore.value, req);
 
+   
     newScore.save(function (err, score) {
         if (err) {
             controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
         }
         else {
             utilities.logInfo("saved");
-            controllerHelpers.respond('saved', null, req, res, 200);
+            return;
+            
         }
     });
     //saveScore(req, res);
