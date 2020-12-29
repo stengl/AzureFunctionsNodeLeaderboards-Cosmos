@@ -27,9 +27,11 @@ function createScore(req, res) {
     utilities.logInfo("saving now", req);
     const newScore = new Score({
         value: String(req.body.value),
-        description: req.body.description,
         createdAt: moment(req.body.createdAt) || moment.utc()
     });
+
+    utilities.logInfo(newScore.value, req);
+
     newScore.save(function (err, score) {
         if (err) {
             controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
