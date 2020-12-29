@@ -23,12 +23,14 @@ const ScoreSchema = new Schema({
   }
 });
 
-ScoreSchema.pre('save', function () {
+ScoreSchema.pre('save', function (next) {
     utilities.logInfo('pre score save info');
+    next();
 });
 
-ScoreSchema.post('save', function () {
+ScoreSchema.post('save', function (next) {
     utilities.logInfo('post score save info');
+    next();
 });
 
 module.exports = Base.discriminator('Scores', ScoreSchema);
