@@ -3,6 +3,7 @@
 const moment = require('moment');
 const Schema = require('mongoose').Schema;
 const Base = require('./baseModel');
+const utilities = require('../../utilities');
 
 const ScoreSchema = new Schema({
   value: {
@@ -20,6 +21,14 @@ const ScoreSchema = new Schema({
   description: { //optional score related description
     type: String
   }
+});
+
+ScoreSchema.pre('save', function () {
+    utilities.logInfo('pre score save info');
+});
+
+ScoreSchema.post('save', function () {
+    utilities.logInfo('post score save info');
 });
 
 module.exports = Base.discriminator('Scores', ScoreSchema);
