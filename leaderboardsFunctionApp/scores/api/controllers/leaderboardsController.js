@@ -143,7 +143,7 @@ function createScore(req, res) {
             controllerHelpers.respond('Error in creating/updating  user: ' + err, null, req, res);
         });
         */
-
+    utilities.logInfo("saving now", req);
     saveScore(req, res);
 };
 
@@ -155,38 +155,9 @@ function saveScore(req, res) {
         description: req.body.description,
         createdAt: moment(req.body.createdAt) || moment.utc()
     });
-
-    newScore.save(function (err, score) {
-        if (err) {
-            controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
-        } else {
-            const miniScoreData = {
-                value: String(req.body.value),
-                score: mongoose.Types.ObjectId(score._id)
-            };
-            /*User.findByIdAndUpdate(user.userId, {
-                $push: {
-                    latestScores: {
-                        $each: [miniScoreData],
-                        $slice: -config.latestScoresPerUserToKeep //minus because we want the last 10 elements
-                    }
-                },
-                $max: {
-                    maxScoreValue: miniScoreData.value
-                },
-                $inc: {
-                    totalTimesPlayed: 1
-                },
-            }, {
-                new: true //return the updated object
-            }, function (err, updatedUser) {
-                if (err)
-                    controllerHelpers.respond('Error in updating user with new score: ' + err, '', req, res);
-                else
-                    controllerHelpers.respond(null, updatedUser, req, res);
-            });*/
-        }
-    });
+    utilities.logInfo("in saveScore function");
+    newScore.save();
+    utilities.logInfo("saved");
 }
 
 //https://**functionURL**/api/users/surroundingByScore/:userId/:count
