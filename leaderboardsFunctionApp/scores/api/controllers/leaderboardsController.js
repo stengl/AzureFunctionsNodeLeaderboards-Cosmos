@@ -160,8 +160,8 @@ function saveScore(req, res) {
         newScore.save();
         utilities.logInfo("saved");
     }
-    catch{
-        utilities.logError("could not create newScore element");
+    catch(err){
+        utilities.logError(`could not create newScore element ${err}`);
     }
     
     
