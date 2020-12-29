@@ -98,11 +98,11 @@ function createScore(req, res) {
     */
 
     //validate score
-    const scoreValue = utilities.getInteger(req.body.value);
+    /*const scoreValue = utilities.getInteger(req.body.value);
     if (isNaN(scoreValue) ) {
         controllerHelpers.respond('score value must be a string', '', req, res, 400);
         return;
-    }
+    }*/
 
     //validate createdAt, if exists
     if (req.body.createdAt) {
