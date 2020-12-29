@@ -44,19 +44,16 @@ function createScore(req, res) {
         }
 
     });
-   
-   /* newScore.save(function (err, score) {
-        if (err) {
-            controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
-        }
-        else {
-            utilities.logInfo("saved");
-            controllerHelpers.respond(null, score, req, res);            
-        }
-    });*/
-    //saveScore(req, res);
+
 };
 
+
+function listAllScores(req, res) {
+    utilities.logInfo("in listallscores function");
+
+    controllerHelpers.listScores(req, res, '-createdAt');
+
+}
 
 //helper function to save the score in the database
 function saveScore(req, res) {
