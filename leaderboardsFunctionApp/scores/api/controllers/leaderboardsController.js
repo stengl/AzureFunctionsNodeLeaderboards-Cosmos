@@ -91,17 +91,18 @@ function getUser(req, res) {
 function createScore(req, res) {
     utilities.logInfo("createScore", req);
 
-    let {
+  /*  let {
         userId,
         username
     } = controllerHelpers.getUserIdusername(req);
+    */
 
     //validate score
     const scoreValue = utilities.getInteger(req.body.value);
-    if (isNaN(scoreValue) || scoreValue < 0) {
+    /*if (isNaN(scoreValue) || scoreValue < 0) {
         controllerHelpers.respond('score value must be an integer', '', req, res, 400);
         return;
-    }
+    }*/
 
     //validate createdAt, if exists
     if (req.body.createdAt) {
@@ -113,7 +114,7 @@ function createScore(req, res) {
     }
 
     //check if the user exists
-    User.findById(userId)
+   /* User.findById(userId)
         .then(function (user) {
             if (!user) {
                 //user does not exist, so let's create him/her
@@ -141,18 +142,18 @@ function createScore(req, res) {
         }).catch(function (err) {
             controllerHelpers.respond('Error in creating/updating  user: ' + err, null, req, res);
         });
+        */
 
+    saveScore(req, res);
 };
 
 
 //helper function to save the score in the database
-function saveScore(user, req, res) {
+function saveScore(req, res) {
     const newScore = new Score({
-        value: Number(req.body.value),
+        value: String(req.body.value),
         description: req.body.description,
-        createdAt: moment(req.body.createdAt) || moment.utc(),
-        userId: user.userId,
-        username: user.username
+        createdAt: moment(req.body.createdAt) || moment.utc()
     });
 
     newScore.save(function (err, score) {
@@ -160,10 +161,10 @@ function saveScore(user, req, res) {
             controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
         } else {
             const miniScoreData = {
-                value: Number(req.body.value),
+                value: String(req.body.value),
                 score: mongoose.Types.ObjectId(score._id)
             };
-            User.findByIdAndUpdate(user.userId, {
+            /*User.findByIdAndUpdate(user.userId, {
                 $push: {
                     latestScores: {
                         $each: [miniScoreData],
@@ -183,7 +184,7 @@ function saveScore(user, req, res) {
                     controllerHelpers.respond('Error in updating user with new score: ' + err, '', req, res);
                 else
                     controllerHelpers.respond(null, updatedUser, req, res);
-            });
+            });*/
         }
     });
 }

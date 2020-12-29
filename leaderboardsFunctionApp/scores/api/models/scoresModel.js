@@ -6,9 +6,9 @@ const Base = require('./baseModel');
 
 const ScoreSchema = new Schema({
   value: {
-    type: Number,
+    type: String,
     required: 'Enter score value'
-  },
+  },/*,
   userId: {
     type: String,
     required: 'Enter userId'
@@ -16,7 +16,7 @@ const ScoreSchema = new Schema({
   username: {
     type: String,
     required: 'Enter username'
-  },
+  },*/
   createdAt: {
     type: Date,
     default: moment.utc() 
