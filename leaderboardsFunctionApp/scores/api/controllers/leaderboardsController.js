@@ -51,7 +51,16 @@ function createScore(req, res) {
 function listAllScores(req, res) {
     utilities.logInfo("in listallscores function");
 
-    controllerHelpers.listScores(req, res, '-createdAt');
+    Score.find().exec(function (err, docs) {
+        if(err){
+            respond(err, null, req, res, 400);
+        }
+        else {
+            respond(err, docs, req, res);
+        }
+    });
+
+    //controllerHelpers.listScores(req, res, '-createdAt');
 
 }
 
