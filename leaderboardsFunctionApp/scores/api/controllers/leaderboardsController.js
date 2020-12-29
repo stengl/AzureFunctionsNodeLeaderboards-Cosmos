@@ -25,7 +25,20 @@ function createScore(req, res) {
     }
 
     utilities.logInfo("saving now", req);
-    saveScore(req, res);
+    const newScore = new Score({
+        value: String(req.body.value),
+        description: req.body.description,
+        createdAt: moment(req.body.createdAt) || moment.utc()
+    });
+    newScore.save(function (err, score) {
+        if (err) {
+            controllerHelpers.respond('Error in creating new score: ' + err, null, req, res);
+        }
+        else {
+            utilities.logInfo("saved");
+        }
+    });
+    //saveScore(req, res);
 };
 
 
