@@ -56,7 +56,6 @@ function respond(error, data, req, res, httpStatus) {
     }
 }
 
-/
 module.exports = {
     listUsers,
     listScores,
