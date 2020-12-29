@@ -44,6 +44,7 @@ function createScore(req, res) {
         }
         else {
             utilities.logInfo("saved");
+            controllerHelpers.respond('saved', null, req, res, 200);
         }
     });
     //saveScore(req, res);
