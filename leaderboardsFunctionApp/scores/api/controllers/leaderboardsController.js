@@ -28,7 +28,7 @@ function createScore(req, res) {
 
     const newScore = new Score({
         value: String(req.body.value),
-        description: "desc",
+        description: req.body.description,
         createdAt: moment(req.body.createdAt) || moment.utc()
     });
 
