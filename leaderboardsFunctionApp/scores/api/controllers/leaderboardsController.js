@@ -29,10 +29,11 @@ function createScore(req, res) {
     let Score;
 
     const connection = utilities.mongoConnect(mongoose);
-    Score = connection.model('Score', ScoreSchema);
+    Score = connection.model('Scores', ScoreSchema);
 
     const newScore = new Score({
         value: String(req.body.value),
+        description: "desc",
         createdAt: moment(req.body.createdAt) || moment.utc()
     });
 
