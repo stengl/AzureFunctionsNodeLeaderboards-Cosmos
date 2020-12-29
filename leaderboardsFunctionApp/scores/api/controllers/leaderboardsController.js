@@ -41,8 +41,7 @@ function createScore(req, res) {
         }
         else {
             utilities.logInfo("saved");
-            return;
-            
+            controllerHelpers.respond(null, score, req, res);            
         }
     });
     //saveScore(req, res);
